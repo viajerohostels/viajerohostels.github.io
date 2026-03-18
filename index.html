@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viajero Hostels</title>
+    <link rel="icon" type="image/png" href="./images.png">
+    <style>
+        :root {
+            --primary: #EB572E;
+            --secondary: #FBD77B;
+            --bg: #FFFFFF;
+            --text-wheel: #FFFFFF;
+
+            /* Segment colors */
+            --c-upgrade: #C0401C;
+            --c-5: #EB572E;
+            --c-10: #F27A59;
+            --c-20: #D54F2A;
+            --c-text-gray: #6B7280;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            margin: 0;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            padding: 40px 60px;
+        }
+
+        .left-panel {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .right-panel {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 540px;
+            /* Aumentado considerablemente */
+            height: auto;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 3.5rem;
+            margin: 0 0 10px 0;
+            line-height: 1.1;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--c-text-gray);
+            margin: 0 0 30px 0;
+            font-weight: 500;
+            line-height: 1.5;
+            max-width: 90%;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: var(--text-wheel);
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(235, 87, 46, 0.25);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 40px;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 14px 25px rgba(235, 87, 46, 0.35);
+            background-color: #f7633a;
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(1px);
+            box-shadow: 0 4px 10px rgba(235, 87, 46, 0.25);
+        }
+
+        button:disabled {
+            background-color: #f3a893;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Rewards Design */
+        .rewards-header {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .rewards-header .icon {
+            color: var(--primary);
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .rewards-header hr {
+            flex-grow: 1;
+            border: none;
+            border-top: 1px solid #E5E7EB;
+            margin-left: 15px;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .card {
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 20px 5px;
+            text-align: center;
+            flex: 1;
+            background: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 0 0 5px;
+            font-weight: 900;
+        }
+
+        .card p {
+            color: #9CA3AF;
+            font-size: 0.65rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .disclaimer {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Roulette Design */
+        .roulette-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arrow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid var(--secondary);
+            z-index: 10;
+            filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 0.25));
+        }
+
+        .wheel-container {
+            width: 440px;
+            height: 440px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 12px solid var(--primary);
+            box-shadow: 0 15px 35px rgba(235, 87, 46, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: transform 6s cubic-bezier(0.2, 0.8, 0.1, 1);
+            background: conic-gradient(var(--c-upgrade) 0deg 45deg,
+                    var(--c-5) 45deg 90deg,
+                    var(--c-10) 90deg 135deg,
+                    var(--c-20) 135deg 180deg,
+                    var(--c-upgrade) 180deg 225deg,
+                    var(--c-5) 225deg 270deg,
+                    var(--c-10) 270deg 315deg,
+                    var(--c-20) 315deg 360deg);
+        }
+
+        .segment-text {
+            position: absolute;
+            top: calc(50% - 25px);
+            left: 50%;
+            width: 190px;
+            height: 50px;
+            transform-origin: 0 25px;
+            color: var(--text-wheel);
+            font-weight: 900;
+            font-size: 24px;
+            /* Grande y bold */
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 35px;
+            line-height: 1;
+            pointer-events: none;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            z-index: 5;
+            border: 7px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-container {
+            margin-top: 30px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            background-color: rgba(251, 215, 123, 0.3);
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 2px dashed var(--primary);
+        }
+
+        .result.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        @media (max-width: 960px) {
+            body {
+                height: auto;
+            }
+
+            .container {
+                flex-direction: column;
+                padding: 30px;
+                gap: 50px;
+                text-align: center;
+            }
+
+            .left-panel {
+                align-items: center;
+            }
+
+            .logo {
+                max-width: 250px;
+                align-self: center;
+                margin-bottom: 20px;
+            }
+
+            button {
+                align-self: center;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .subtitle {
+                max-width: 100%;
+                font-size: 1.05rem;
+            }
+
+            .right-panel {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .wheel-container {
+                width: 320px;
+                height: 320px;
+                border-width: 8px;
+            }
+
+            .segment-text {
+                width: 145px;
+                font-size: 18px;
+                padding-right: 25px;
+                top: calc(50% - 20px);
+                height: 40px;
+                transform-origin: 0 20px;
+            }
+
+            .wheel-center {
+                width: 50px;
+                height: 50px;
+                border-width: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Efectos de Audio -->
+    <audio id="spinSound" src="Juego de Casino 1.mp3"></audio>
+    <audio id="winSound" src="freesound_community-goodresult-82807.mp3"></audio>
+
+    <div class="container">
+        <!-- Lado Izquierdo: Beneficios y Texto -->
+        <div class="left-panel">
+            <img src="_logo-xs_hotel-viajero-ctg.png" alt="Logotipo Viajero Hostels" class="logo" />
+
+            <h1>¡Gira y Gana!</h1>
+            <p class="subtitle">Prueba tu suerte para obtener beneficios exclusivos en tu próxima estancia con nosotros.
+            </p>
+
+            <button id="spinBtn">GIRAR AHORA</button>
+
+            <div class="rewards-header">
+                <span class="icon">🎁</span> RECOMPENSAS DISPONIBLES
+                <hr />
+            </div>
+
+            <div class="cards-container">
+                <div class="card">
+                    <h3>5%</h3>
+                    <p>OFF Upgrade</p>
+                </div>
+                <div class="card">
+                    <h3>10%</h3>
+                    <p>OFF Upgrade</p>
+                </div>
+                <div class="card">
+                    <h3>20%</h3>
+                    <p>OFF Upgrade</p>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                * El premio "Gratis Upgrade" es promocional y está sujeto a disponibilidad según temporada.
+            </div>
+        </div>
+
+        <!-- Lado Derecho: Ruleta -->
+        <div class="right-panel">
+            <div class="roulette-wrapper">
+                <div class="arrow"></div>
+                <div class="wheel-container" id="wheel">
+                    <!-- Textos inyectados por JS -->
+                </div>
+                <div class="wheel-center"></div>
+            </div>
+
+            <div class="result-container">
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Los beneficios incluyen 'GRATIS UPGRADE' para que aparezca 2 veces visualmente,
+        // pero NUNCA cae de acuerdo con la lógica de validIndices.
+        const segments = [
+            "GRATIS UPGRADE",
+            "5% OFF",
+            "10% OFF",
+            "20% OFF",
+            "GRATIS UPGRADE",
+            "5% OFF",
+            "10% OFF",
+            "20% OFF"
+        ];
+
+        const wheel = document.getElementById('wheel');
+        const spinBtn = document.getElementById('spinBtn');
+        const resultDiv = document.getElementById('result');
+        const spinSound = document.getElementById('spinSound');
+        const winSound = document.getElementById('winSound');
+
+        const arc = 360 / segments.length; // 45 grados por segmento
+
+        // Renderizar textos
+        segments.forEach((text, i) => {
+            const el = document.createElement('div');
+            el.className = 'segment-text';
+            const angle = (i * arc) + (arc / 2) - 90;
+
+            el.style.transform = `rotate(${angle}deg)`;
+
+            // Personalizamos el caso de Gratis Upgrade para que quepa bien
+            if (text === "GRATIS UPGRADE") {
+                el.innerHTML = "GRATIS<br>UPGRADE";
+                el.style.fontSize = "19px";
+                el.style.lineHeight = "1.1";
+            } else {
+                el.innerText = text;
+            }
+
+            wheel.appendChild(el);
+        });
+
+        let totalRotation = 0;
+        let isSpinning = false;
+
+        spinBtn.addEventListener('click', () => {
+            if (isSpinning) return;
+
+            isSpinning = true;
+            spinBtn.disabled = true;
+            resultDiv.classList.remove('show');
+
+            // Reproducir sonido de ruleta girando
+            spinSound.currentTime = 0;
+            spinSound.play().catch(e => console.log('Bloqueado autoplay de audio'));
+
+            // Índices válidos (excluye el 0 y 4 que son "GRATIS UPGRADE" garantizando 0% de prob)
+            const validIndices = [1, 2, 3, 5, 6, 7];
+            const winningIndex = validIndices[Math.floor(Math.random() * validIndices.length)];
+
+            // Punto aleatorio exacto dentro del segmento
+            const padding = 5;
+            const minAngle = winningIndex * arc + padding;
+            const maxAngle = (winningIndex + 1) * arc - padding;
+            const randomPoint = minAngle + Math.random() * (maxAngle - minAngle);
+
+            // Ajustamos a donde debe detenerse matematicamente arriba (mod 360)
+            const finalMod = 360 - randomPoint;
+            const spins = 5 + Math.floor(Math.random() * 4); // 5 a 8 vueltas completas
+            const baseRotationToAdd = spins * 360;
+
+            const currentMod = totalRotation % 360;
+            let offsetDiff = finalMod - currentMod;
+            if (offsetDiff < 0) {
+                offsetDiff += 360;
+            }
+
+            totalRotation += baseRotationToAdd + offsetDiff;
+
+            wheel.style.transform = `rotate(${totalRotation}deg)`;
+
+            // Mostrar el resultado después de que acabe la animación
+            setTimeout(() => {
+                isSpinning = false;
+                spinBtn.disabled = false;
+
+                // Parar sonido de giro
+                spinSound.pause();
+
+                // Reproducir sonido de premio
+                winSound.currentTime = 0;
+                winSound.play().catch(e => console.log('Bloqueado autoplay de audio'));
+
+                resultDiv.innerText = `¡Felicidades! Ganaste: ${segments[winningIndex]} Upgrade para tua Alojamiento`;
+                resultDiv.classList.add('show');
+
+            }, 6000); // 6 segundos de transición definidos en CSS
+        });
+    </script>
+</body>
+
+</html>
