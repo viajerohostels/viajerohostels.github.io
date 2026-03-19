@@ -398,7 +398,7 @@
 
             <div class="disclaimer">
                 * El premio "Gratis Upgrade + noche gratis" es promocional y está sujeto a disponibilidad según
-                temporada.
+                temporada. Los descuentos de alojamiento son válidos solo durante tu estadía. Canjeable directamente en recepción
             </div>
         </div>
 
@@ -511,7 +511,7 @@
                 winSound.currentTime = 0;
                 winSound.play().catch(e => console.log('Bloqueado autoplay de audio'));
 
-                resultDiv.innerText = `¡Felicidades! Ganaste: ${segments[winningIndex]} Upgrade para tua Alojamiento`;
+                resultDiv.innerText = `¡Felicidades! Ganaste: ${segments[winningIndex]} en upgrade y ${segments[winningIndex]} en tu próxima estadía en Viajero`;
                 resultDiv.classList.add('show');
 
             }, 6000); // 6 segundos de transición definidos en CSS
