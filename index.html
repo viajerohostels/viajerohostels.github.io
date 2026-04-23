@@ -1,0 +1,1259 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viajero Hostels</title>
+    <link rel="icon" type="image/png" href="./Logo-icono.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WSMN8FMM');</script>
+<!-- End Google Tag Manager -->
+    <style>
+        :root {
+            --primary: #EB572E;
+            --primary-dark: #3b251d;
+            --bg: #f8eee8;
+            --surface: #fffaf5;
+            --card-border: #f2dfd5;
+            --text-wheel: #ffffff;
+            --text-main: #402c23;
+
+            --c-upgrade: #a84226;
+            --c-25: #ef6c33;
+            --c-10: #ff8245;
+            --c-20: #db552d;
+            --c-night: #b34b2d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg) url('./fondo-destok.png') center top / cover no-repeat;
+            color: var(--text-main);
+            margin: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 22px 0;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 26px;
+            align-items: center;
+            padding: 20px 6px 26px;
+        }
+
+        .hero-left {
+            max-width: 610px;
+        }
+
+        .hero-logo {
+            width: clamp(500px, 22vw, 250px);
+            height: auto;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 7px 12px rgba(201, 88, 40, 0.2));
+            margin-left: -100px;
+        }
+
+        .eyebrow {
+            font-family: 'Caveat', cursive;
+            color: #3e2a21;
+            margin: 0;
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            line-height: 0.92;
+            font-size: clamp(3.2rem, 8vw, 6rem);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        h1 .dark {
+            color: #3a241b;
+        }
+
+        h1 .orange {
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 1.06rem;
+            color: #5f4d43;
+            margin: 18px 0 22px;
+            line-height: 1.5;
+            max-width: 88%;
+            font-weight: 600;
+        }
+
+        .subtitle strong {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        #spinBtn {
+            background: linear-gradient(145deg, #ff5f1f, #eb572e);
+            color: #fff;
+            border: 0;
+            padding: 15px 33px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            border-radius: 999px;
+            cursor: pointer;
+            box-shadow: 0 15px 24px rgba(235, 87, 46, 0.27);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 18px;
+        }
+
+        #spinBtn::after {
+            content: "\2192";
+            margin-left: 10px;
+            font-size: 1.1rem;
+        }
+
+        #spinBtn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 28px rgba(235, 87, 46, 0.35);
+        }
+
+        #spinBtn:disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 2px;
+        }
+
+        .hero-left .benefits-grid {
+            width: 120%;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .benefit {
+            background: #fff;
+            border: 1px solid #f1dfd5;
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            min-height: 74px;
+        }
+
+        .benefit-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #ffe8de;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .benefit h3 {
+            margin: 0;
+            color: var(--primary);
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 1.75rem;
+            line-height: 0.9;
+        }
+
+        .benefit p {
+            margin: 3px 0 0;
+            font-size: 0.7rem;
+            color: #614f44;
+            text-transform: uppercase;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero-right {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .roulette-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            height: 500px;
+        }
+
+        .wheel-shell {
+            position: relative;
+            width: 440px;
+            height: 440px;
+            border-radius: 50%;
+            padding: 20px;
+            background: radial-gradient(circle at 35% 26%, #ff9d59 0%, #ff6e2d 46%, #da4e27 100%);
+            box-shadow: 0 20px 34px rgba(155, 68, 32, 0.34);
+        }
+
+        .lights {
+            position: absolute;
+            inset: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .light {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff9db 0%, #ffe18f 65%, #f6b44d 100%);
+            box-shadow: 0 0 8px rgba(255, 215, 120, 0.9);
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+        }
+
+        .arrow {
+            position: absolute;
+            top: -26px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 54px;
+            height: 72px;
+            background: linear-gradient(180deg, #ffd97f 0%, #f8a640 70%, #f29b2f 100%);
+            clip-path: polygon(50% 100%, 7% 40%, 7% 0%, 93% 0%, 93% 40%);
+            display: grid;
+            place-items: center;
+            z-index: 12;
+            box-shadow: 0 10px 15px rgba(100, 60, 20, 0.27);
+            border-radius: 30px;
+        }
+
+        .arrow::after {
+            content: "";
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #fff3c6;
+            box-shadow: inset 0 0 0 4px rgba(244, 152, 37, 0.45);
+            margin-bottom: 16px;
+        }
+
+        .wheel-container {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 10px solid #ec6f33;
+            box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.2);
+            transition: transform 6s cubic-bezier(0.2, 0.8, 0.1, 1);
+            background: conic-gradient(var(--c-upgrade) 0deg 45deg,
+                    var(--c-25) 45deg 90deg,
+                    var(--c-10) 90deg 135deg,
+                    var(--c-20) 135deg 180deg,
+                    var(--c-night) 180deg 225deg,
+                    var(--c-20) 225deg 270deg,
+                    var(--c-25) 270deg 315deg,
+                    var(--c-20) 315deg 360deg);
+            z-index: 2;
+        }
+
+        .wheel-container::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 32% 23%, rgba(255, 255, 255, 0.24), transparent 48%);
+            pointer-events: none;
+        }
+
+        .segment-text {
+            position: absolute;
+            top: calc(50% - 23px);
+            left: 50%;
+            width: 190px;
+            height: 46px;
+            transform-origin: 0 23px;
+            color: var(--text-wheel);
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 26px;
+            line-height: 1;
+            pointer-events: none;
+            letter-spacing: 0.4px;
+            text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 88px;
+            height: 88px;
+            background-color: #fff1cc;
+            border-radius: 50%;
+            z-index: 8;
+            border: 5px solid #f6a63f;
+            box-shadow: 0 0 0 5px #fff6df, 0 8px 18px rgba(0, 0, 0, 0.22);
+            display: grid;
+            place-items: center;
+        }
+
+        .wheel-center img {
+            width: 54px;
+            height: auto;
+        }
+
+        .result-container {
+            display: none;
+        }
+
+        .result {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            background: linear-gradient(145deg, #ec5b2f, #c44224);
+            padding: 10px 16px;
+            border-radius: 14px;
+            max-width: 520px;
+        }
+
+        .result.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .result-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(19, 12, 9, 0.6);
+            backdrop-filter: blur(3px);
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 50;
+            padding: 18px;
+        }
+
+        .result-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .result-panel {
+            position: relative;
+            max-width: 560px;
+            width: min(100%, 560px);
+            background: linear-gradient(180deg, #fff8f2 0%, #ffeede 100%);
+            border: 1px solid #f4d2bf;
+            border-radius: 18px;
+            box-shadow: 0 18px 34px rgba(43, 23, 14, 0.28);
+            padding: 34px 22px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .result-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            border: 0;
+            border-radius: 50%;
+            background: #fff;
+            color: #b7532f;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+        }
+
+        .result-modal .result {
+            opacity: 1;
+            transform: none;
+            background: linear-gradient(145deg, #ec5b2f, #c44224);
+            padding: 18px 20px;
+            border-radius: 16px;
+            max-width: none;
+            width: 100%;
+            color: #fff;
+            font-size: clamp(1.1rem, 2.4vw, 1.55rem);
+            line-height: 1.25;
+            box-shadow: 0 12px 24px rgba(196, 66, 36, 0.22);
+        }
+
+        .result-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            min-height: 42px;
+        }
+
+        .result-label img {
+            display: block;
+            width: clamp(100px, 24vw, 100px);
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.16));
+        }
+
+        .result-prize {
+            display: block;
+            font-weight: 800;
+            color: #FFE8DE;
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            font-weight: 500;
+        }
+
+        .main-content {
+            background: var(--surface);
+            border-radius: 40px;
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            box-shadow: 0 14px 26px rgba(180, 127, 90, 0.15);
+            margin-top: -15px;
+        }
+
+        .section-inner {
+            padding: 22px 30px 24px;
+            margin: 12px 18px;
+        }
+
+        .section-title {
+            margin: 0 0 12px;
+            color: #4b3328;
+            font-size: 2rem;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            font-family: 'Bebas Neue', Impact, sans-serif;
+        }
+
+        .destinations {
+            padding-top: 4px;
+        }
+
+        .destinations-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .destinations-sub {
+            margin: 0;
+            color: #7b685e;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .destinations-tools {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .location-status {
+            font-size: 0.90rem;
+            color: #7f6c61;
+            font-weight: 700;
+        }
+
+        .destinations-slider-wrap {
+            position: relative;
+        }
+
+        .destinations-grid {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 2px 2px 12px;
+            margin-bottom: 20px;
+        }
+
+        .destinations-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .destinations-grid::-webkit-scrollbar-thumb {
+            background: #e9cfc0;
+            border-radius: 999px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38px;
+            height: 38px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            color: #d6562b;
+            font-size: 1.4rem;
+            line-height: 1;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .slider-nav:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .slider-prev {
+            left: -12px;
+        }
+
+        .slider-next {
+            right: -12px;
+        }
+
+        .destination-card {
+            flex: 0 0 212px;
+            min-height: 132px;
+            border-radius: 12px;
+            border: 1px solid #ecd8cd;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: end;
+            padding: 10px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 -60px 60px rgba(23, 18, 15, 0.42);
+            transition: transform 0.24s ease;
+            scroll-snap-align: start;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .destination-card span {
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: 0.4px;
+            font-size: 0.95rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        .destination-card small {
+            display: block;
+            font-size: 0.67rem;
+            letter-spacing: 0.3px;
+            margin-top: 2px;
+        }
+
+        .distance-tag {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.94);
+            color: #5e4336;
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-size: 0.66rem;
+            font-weight: 800;
+            letter-spacing: 0.25px;
+            text-transform: uppercase;
+        }
+
+        .destination-cartagena {
+            background-image: linear-gradient(140deg, #cf7d3f, #8f4f29);
+        }
+
+        .destination-medellin {
+            background-image: linear-gradient(140deg, #4f9ac8, #3f5477);
+        }
+
+        .destination-sayulita {
+            background-image: linear-gradient(140deg, #68b1c4, #6e7540);
+        }
+
+        .destination-cusco {
+            background-image: linear-gradient(140deg, #a89b66, #5c544b);
+        }
+
+        .destination-buenosaires {
+            background-image: linear-gradient(140deg, #8cb8d4, #54758a);
+        }
+
+        @media (max-width: 1140px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .hero-left {
+                max-width: 100%;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .subtitle {
+                max-width: 700px;
+            }
+
+            .destinations-head {
+                align-items: flex-start;
+            }
+
+            .destination-card {
+                flex-basis: 230px;
+            }
+        }
+
+        @media (max-width: 960px) {
+            body {
+                background-image: url('./Fondo mobila - destok.png');
+            }
+
+            .page {
+                padding: 14px 12px 0;
+            }
+
+            .roulette-wrapper {
+                width: 390px;
+                height: 390px;
+            }
+
+            .wheel-shell {
+                width: 358px;
+                height: 358px;
+                padding: 16px;
+            }
+
+            .wheel-container {
+                width: 326px;
+                height: 326px;
+            }
+
+            .segment-text {
+                width: 136px;
+                font-size: 1.6rem;
+                padding-right: 20px;
+                top: calc(50% - 18px);
+                height: 36px;
+                transform-origin: 0 18px;
+            }
+
+            .wheel-center {
+                width: 74px;
+                height: 74px;
+            }
+
+            .wheel-center img {
+                width: 44px;
+            }
+
+            .section-title {
+                font-size: 1.65rem;
+            }
+
+            .destinations-tools {
+                width: 100%;
+            }
+
+            .destination-card {
+                flex-basis: 210px;
+            }
+
+            .slider-nav {
+                width: 34px;
+                height: 34px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-logo {
+                width: 300px;
+                margin-left: 0px;
+            }
+
+            .eyebrow {
+                font-size: 2.3rem;
+            }
+
+            h1 {
+                font-size: 4rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+                max-width: 100%;
+            }
+
+            #spinBtn {
+                width: 100%;
+                max-width: 310px;
+            }
+             .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2px;
+            margin-bottom: 20px;
+        }
+
+            .hero-left .benefits-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+            }
+
+            .roulette-wrapper {
+                width: 320px;
+                height: 320px;
+            }
+
+            .wheel-shell {
+                width: 300px;
+                height: 300px;
+                padding: 14px;
+            }
+
+            .wheel-container {
+                width: 272px;
+                height: 272px;
+                border-width: 8px;
+            }
+
+            .segment-text {
+                width: 116px;
+                font-size: 1.13rem;
+                padding-right: 12px;
+                top: calc(50% - 14px);
+                height: 28px;
+                transform-origin: 0 14px;
+            }
+
+            .main-content {
+                border-radius: 34px;
+             }
+
+            .section-inner {
+                margin: 6px 10px;
+                padding: 18px 14px 16px;
+            }
+
+            .destination-card {
+                flex-basis: 82%;
+            }
+
+            .result-label img {
+                width: 120px;
+            }
+
+            .slider-prev {
+                left: -8px;
+            }
+
+            .slider-next {
+                right: -8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WSMN8FMM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <audio id="spinSound" src="Juego de Casino 1.mp3"></audio>
+    <audio id="winSound" src="freesound_community-goodresult-82807.mp3"></audio>
+
+    <div class="page">
+        <section class="hero">
+            <div class="hero-left">
+                <img src="./Logo.png" alt="Viajero Hostels" class="hero-logo">
+                <p class="eyebrow">Tu suerte te espera</p>
+                <h1>
+                    <span class="dark">¡Gira</span>
+                    <span class="orange">y Gana!</span>
+                </h1>
+                <p class="subtitle">Prueba tu suerte y obtén beneficios exclusivos para tu próxima aventura con <strong>Viajero Hostels.</strong></p>
+
+                <button id="spinBtn" type="button">Girar Ahora</button>
+
+                <div class="benefits-grid">
+                    <article class="benefit">
+                        <div>
+                            <h3>Gratis</h3>
+                            <p>Upgrade + 1 noche gratis</p>
+                        </div>
+                    </article>
+                    <article class="benefit">
+                        <div class="benefit-icon">%</div>
+                        <div>
+                            <h3>10%</h3>
+                            <p>Descuento</p>
+                        </div>
+                    </article>
+                    <article class="benefit">
+                        <div class="benefit-icon">%</div>
+                        <div>
+                            <h3>15%</h3>
+                            <p>Descuento</p>
+                        </div>
+                    </article>
+                    <article class="benefit">
+                        <div class="benefit-icon">%</div>
+                        <div>
+                            <h3>20%</h3>
+                            <p>Descuento</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="roulette-wrapper">
+                    <div class="wheel-shell">
+                        <div class="arrow" aria-hidden="true"></div>
+                        <div class="lights" id="lights"></div>
+                        <div class="wheel-container" id="wheel"></div>
+                        <div class="wheel-center">
+                            <img src="./Logo-icono.png" alt="Logo Viajero">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-container">
+                    <div class="result" id="result"></div>
+                </div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <div class="section-inner">
+                <section class="destinations">
+                    <div class="destinations-head">
+                        <div>
+                            <h2 class="section-title">Más de 30 destinos increíbles</h2>
+                            <p class="destinations-sub">Estos hostales tienen tu beneficio listo. Continúa desde aquí. No te lo pierdas.</p>
+                        </div>
+                        <div class="destinations-tools">
+                            <span class="location-status" id="locationStatus">Mostrando todos los destinos.</span>
+                        </div>
+                    </div>
+
+                    <div class="destinations-slider-wrap">
+                        <button class="slider-nav slider-prev" id="destinationsPrev" type="button" aria-label="Destino anterior">&#8249;</button>
+                        <div class="destinations-grid" id="destinationsGrid"></div>
+                        <button class="slider-nav slider-next" id="destinationsNext" type="button" aria-label="Siguiente destino">&#8250;</button>
+                    </div>
+                    <div>
+                        <p class="location-status">
+                            * El premio "Gratis Upgrade + noche gratis" es promocional y está sujeto a disponibilidad según temporada.
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div class="result-modal" id="resultModal" aria-hidden="true">
+        <div class="result-panel" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+            <button class="result-close" id="resultClose" type="button" aria-label="Cerrar resultado">&times;</button>
+            <div class="result" id="result">
+                <span class="result-label"><img src="./Logo-blanco.png" alt=""></span>
+                <span class="result-prize" id="resultPrize">Aparecerá aquí tu premio</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const segments = [
+            '🎁GRATIS',
+            '25% OFF',
+            '10% OFF',
+            '20% OFF',
+            '🎁GRATIS',
+            '20% OFF',
+            '15% OFF',
+            '20% OFF'
+        ];
+
+        const wheel = document.getElementById('wheel');
+        const lights = document.getElementById('lights');
+        const spinBtn = document.getElementById('spinBtn');
+        const resultDiv = document.getElementById('result');
+        const resultPrize = document.getElementById('resultPrize');
+        const resultModal = document.getElementById('resultModal');
+        const resultClose = document.getElementById('resultClose');
+        const spinSound = document.getElementById('spinSound');
+        const winSound = document.getElementById('winSound');
+
+        const destinationsGrid = document.getElementById('destinationsGrid');
+        const locationStatus = document.getElementById('locationStatus');
+        const destinationsPrev = document.getElementById('destinationsPrev');
+        const destinationsNext = document.getElementById('destinationsNext');
+
+        const GEO_PROMPT_KEY = 'vh_geo_prompted_once';
+        const GEO_COORDS_KEY = 'vh_geo_cached_coords';
+
+        const viajeroHostels = [
+            { name: 'Arequipa', country: 'Perú', lat: -16.3989, lon: -71.5350, gradientClass: 'destination-cusco', image: './hostales/arequipa.jpg' },
+            { name: 'Bacalar', country: 'México', lat: 18.6813, lon: -88.3939, gradientClass: 'destination-sayulita', image: './hostales/bacalar.jpg' },
+            { name: 'Bogotá', country: 'Colombia', lat: 4.7110, lon: -74.0721, gradientClass: 'destination-medellin', image: './hostales/bogota.jpg' },
+            { name: 'Buenos Aires', country: 'Argentina', lat: -34.6037, lon: -58.3816, gradientClass: 'destination-buenosaires', image: './hostales/buenos_aires.avif' },
+            { name: 'Cali', country: 'Colombia', lat: 3.4516, lon: -76.5320, gradientClass: 'destination-cartagena', image: './hostales/cali.jpg' },
+            { name: 'Cartagena', country: 'Colombia', lat: 10.3910, lon: -75.4794, gradientClass: 'destination-cartagena', image: './hostales/cartagena_centro.jpg' },
+            { name: 'Cartagena Getsemaní', country: 'Colombia', lat: 10.4220, lon: -75.5460, gradientClass: 'destination-cartagena', image: './hostales/getsemani.webp' },
+            { name: 'CDMX Centro', country: 'México', lat: 19.4326, lon: -99.1332, gradientClass: 'destination-medellin', image: './hostales/cdmx.jpg' },
+            { name: 'Colonia', country: 'Uruguay', lat: -34.4690, lon: -57.8400, gradientClass: 'destination-buenosaires', image: './hostales/colonia.avif' },
+            { name: 'Colonia Posada B&B', country: 'Uruguay', lat: -34.4730, lon: -57.8430, gradientClass: 'destination-buenosaires', image: './hostales/posada.webp' },
+            { name: 'Cusco', country: 'Perú', lat: -13.5319, lon: -71.9675, gradientClass: 'destination-cusco', image: './hostales/cusco.webp' },
+            { name: 'Guatapé', country: 'Colombia', lat: 6.2342, lon: -75.1635, gradientClass: 'destination-medellin', image: './hostales/guatape.webp' },
+            { name: 'Huacachina', country: 'Perú', lat: -14.0872, lon: -75.7625, gradientClass: 'destination-cusco', image: './hostales/huacachina.webp' },
+            { name: 'La Fortuna', country: 'Costa Rica', lat: 10.4716, lon: -84.6450, gradientClass: 'destination-sayulita', image: './hostales/fortuna.jpg' },
+            { name: 'Lima Barranco', country: 'Perú', lat: -12.1431, lon: -77.0205, gradientClass: 'destination-cusco', image: './hostales/lima.avif' },
+            { name: 'Medellín', country: 'Colombia', lat: 6.2442, lon: -75.5812, gradientClass: 'destination-medellin', image: './hostales/mde.webp' },
+            { name: 'Miami', country: 'Estados Unidos', lat: 25.7617, lon: -80.1918, gradientClass: 'destination-buenosaires', image: '/hostales/miami.webp' },
+            { name: 'Montevideo', country: 'Uruguay', lat: -34.9011, lon: -56.1645, gradientClass: 'destination-buenosaires', image: '/hostales/montevideo.webp' },
+            { name: 'Oaxaca', country: 'México', lat: 17.0732, lon: -96.7266, gradientClass: 'destination-sayulita', image: '/hostales/oaxaca.avif' },
+            { name: 'Panamá Casco Viejo', country: 'Panamá', lat: 8.9495, lon: -79.5348, gradientClass: 'destination-medellin', image: './hostales/viajero_panama.jpg' },
+            { name: 'Paracas', country: 'Perú', lat: -13.8368, lon: -76.2510, gradientClass: 'destination-cusco', image: './hostales/paracas.jpg' },
+            { name: 'Puerto Escondido', country: 'México', lat: 15.8610, lon: -97.0730, gradientClass: 'destination-sayulita', image: './hostales/puerto_escondido.jpg' },
+            { name: 'Quito', country: 'Ecuador', lat: -0.1807, lon: -78.4678, gradientClass: 'destination-medellin', image: './hostales/quito.jpg' },
+            { name: 'Salento', country: 'Colombia', lat: 4.6363, lon: -75.5675, gradientClass: 'destination-cartagena', image: './hostales/viajero-salento-14.jpg' },
+            { name: 'San Andrés', country: 'Colombia', lat: 12.5847, lon: -81.7006, gradientClass: 'destination-sayulita', image: './hostales/san_andres.jpg' },
+            { name: 'San José', country: 'Costa Rica', lat: 9.9281, lon: -84.0907, gradientClass: 'destination-medellin', image: './hostales/san_jose.webp' },
+            { name: 'Santa Marta', country: 'Colombia', lat: 11.2408, lon: -74.1990, gradientClass: 'destination-cartagena', image: './hostales/santa_marta.webp' },
+            { name: 'Sayulita', country: 'México', lat: 20.8688, lon: -105.4407, gradientClass: 'destination-sayulita', image: './hostales/sayulita.webp' },
+            { name: 'Tayrona', country: 'Colombia', lat: 11.3180, lon: -73.9227, gradientClass: 'destination-cartagena', image: './hostales/tayrona.jpg' }
+        ];
+
+        const arc = 360 / segments.length;
+
+        segments.forEach((text, i) => {
+            const el = document.createElement('div');
+            el.className = 'segment-text';
+            const angle = (i * arc) + (arc / 2) - 90;
+            el.style.transform = `rotate(${angle}deg)`;
+
+            if (text.includes('GRATIS')) {
+                const lines = text.split(' ');
+                el.innerHTML = `${lines[0]}<br>${lines.slice(1).join(' ')}`;
+                el.style.fontSize = '1.58rem';
+                el.style.lineHeight = '1.05';
+            } else {
+                el.innerText = text;
+            }
+
+            wheel.appendChild(el);
+        });
+
+        const lightCount = 20;
+        for (let i = 0; i < lightCount; i++) {
+            const bulb = document.createElement('span');
+            bulb.className = 'light';
+            const angle = (360 / lightCount) * i;
+            bulb.style.transform = `rotate(${angle}deg) translate(208px, -6px)`;
+            lights.appendChild(bulb);
+        }
+
+        function renderDestinations(list, showDistance = false) {
+            destinationsGrid.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+
+            list.forEach((hostel) => {
+                const card = document.createElement('article');
+                card.className = `destination-card ${hostel.gradientClass}`;
+                if (hostel.image && !hostel.image.startsWith('link_')) {
+                    card.style.backgroundImage = `linear-gradient(180deg, rgba(15, 12, 10, 0.05) 35%, rgba(15, 12, 10, 0.68) 100%), url('${hostel.image}')`;
+                }
+
+                const label = document.createElement('span');
+                label.textContent = hostel.name;
+
+                const country = document.createElement('small');
+                country.textContent = hostel.country;
+                label.appendChild(country);
+                card.appendChild(label);
+
+                if (showDistance && typeof hostel.distanceKm === 'number') {
+                    const tag = document.createElement('div');
+                    tag.className = 'distance-tag';
+                    tag.textContent = `${Math.round(hostel.distanceKm)} km`;
+                    card.appendChild(tag);
+                }
+
+                // Track hostel click
+                card.addEventListener('click', () => {
+                    dataLayer.push({
+                        'event': 'hostel_click',
+                        'hostel_name': hostel.name,
+                        'hostel_country': hostel.country,
+                        'hostel_distance_km': hostel.distanceKm || 'unknown'
+                    });
+                });
+
+                fragment.appendChild(card);
+            });
+
+            destinationsGrid.appendChild(fragment);
+            updateSliderButtons();
+        }
+
+        function sliderStep() {
+            const firstCard = destinationsGrid.querySelector('.destination-card');
+            if (!firstCard) return 240;
+            return firstCard.getBoundingClientRect().width + 12;
+        }
+
+        function updateSliderButtons() {
+            const maxScrollLeft = destinationsGrid.scrollWidth - destinationsGrid.clientWidth;
+            destinationsPrev.disabled = destinationsGrid.scrollLeft <= 2;
+            destinationsNext.disabled = destinationsGrid.scrollLeft >= maxScrollLeft - 2;
+        }
+
+        function haversineDistanceKm(lat1, lon1, lat2, lon2) {
+            const toRad = (deg) => deg * Math.PI / 180;
+            const earthRadiusKm = 6371;
+
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+            return earthRadiusKm * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+        }
+
+        function sortByCoordinates(latitude, longitude) {
+            const withDistance = viajeroHostels.map((hostel) => ({
+                ...hostel,
+                distanceKm: haversineDistanceKm(latitude, longitude, hostel.lat, hostel.lon)
+            }));
+
+            const farHostels = withDistance.filter(h => h.distanceKm > 5).sort((a, b) => a.distanceKm - b.distanceKm);
+            const nearHostels = withDistance.filter(h => h.distanceKm <= 5).sort((a, b) => a.distanceKm - b.distanceKm);
+            const sorted = [...farHostels, ...nearHostels];
+            
+            renderDestinations(sorted, true);
+            const first = sorted.length > 0 ? sorted[0].name : 'Tu ubicación';
+            locationStatus.textContent = `Ordenado por distancia: ${first} es el más cercano. Los destinos a 0-5 km están al final.`;
+        }
+
+        function useDefaultDestinationOrder() {
+            const defaultList = [...viajeroHostels].sort((a, b) => {
+                if (a.country === b.country) return a.name.localeCompare(b.name, 'es');
+                return a.country.localeCompare(b.country, 'es');
+            });
+            renderDestinations(defaultList, false);
+        }
+
+        function requestLocationSorting() {
+            if (!navigator.geolocation) {
+                locationStatus.textContent = 'Tu navegador no soporta geolocalización. Mostrando orden general.';
+                return;
+            }
+
+            locationStatus.textContent = 'Solicitando permiso de ubicación...';
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    localStorage.setItem(GEO_COORDS_KEY, JSON.stringify({ latitude, longitude }));
+                    sortByCoordinates(latitude, longitude);
+                },
+                () => {
+                    locationStatus.textContent = 'No se pudo obtener tu ubicación. Mostrando orden general.';
+                    useDefaultDestinationOrder();
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 300000
+                }
+            );
+        }
+
+        function initLocationOnLoad() {
+            const cached = localStorage.getItem(GEO_COORDS_KEY);
+            if (cached) {
+                try {
+                    const parsed = JSON.parse(cached);
+                    if (typeof parsed.latitude === 'number' && typeof parsed.longitude === 'number') {
+                        sortByCoordinates(parsed.latitude, parsed.longitude);
+                        return;
+                    }
+                } catch (error) {
+                    localStorage.removeItem(GEO_COORDS_KEY);
+                }
+            }
+
+            useDefaultDestinationOrder();
+
+            const wasPrompted = localStorage.getItem(GEO_PROMPT_KEY) === '1';
+            if (!wasPrompted) {
+                localStorage.setItem(GEO_PROMPT_KEY, '1');
+                alert('Para mostrarte los hostels mas cercanos, vamos a pedir permiso de ubicacion una sola vez.');
+                requestLocationSorting();
+            } else {
+                locationStatus.textContent = 'Mostrando destinos generales. Tu ubicacion ya fue gestionada anteriormente.';
+            }
+        }
+
+        initLocationOnLoad();
+
+        function closeResultModal() {
+            resultModal.classList.remove('open');
+            resultModal.setAttribute('aria-hidden', 'true');
+            resultDiv.classList.remove('show');
+        }
+
+        resultClose.addEventListener('click', closeResultModal);
+        resultModal.addEventListener('click', (event) => {
+            if (event.target === resultModal) {
+                closeResultModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && resultModal.classList.contains('open')) {
+                closeResultModal();
+            }
+        });
+
+        destinationsPrev.addEventListener('click', () => {
+            destinationsGrid.scrollBy({ left: -sliderStep() * 2, behavior: 'smooth' });
+        });
+
+        destinationsNext.addEventListener('click', () => {
+            destinationsGrid.scrollBy({ left: sliderStep() * 2, behavior: 'smooth' });
+        });
+
+        destinationsGrid.addEventListener('scroll', updateSliderButtons);
+        window.addEventListener('resize', updateSliderButtons);
+
+        let totalRotation = 0;
+        let isSpinning = false;
+
+        spinBtn.addEventListener('click', () => {
+            if (isSpinning) return;
+
+            isSpinning = true;
+            spinBtn.disabled = true;
+            closeResultModal();
+            
+            // Track spin event
+            dataLayer.push({
+                'event': 'spin_wheel_click',
+                'timestamp': new Date().toISOString()
+            });
+
+            spinSound.currentTime = 0;
+            spinSound.play().catch(() => { });
+
+            const validIndices = [1, 2, 3, 5, 6, 7];
+            const winningIndex = validIndices[Math.floor(Math.random() * validIndices.length)];
+
+            const padding = 5;
+            const minAngle = winningIndex * arc + padding;
+            const maxAngle = (winningIndex + 1) * arc - padding;
+            const randomPoint = minAngle + Math.random() * (maxAngle - minAngle);
+
+            const finalMod = 360 - randomPoint;
+            const spins = 5 + Math.floor(Math.random() * 4);
+            const baseRotationToAdd = spins * 360;
+
+            const currentMod = totalRotation % 360;
+            let offsetDiff = finalMod - currentMod;
+            if (offsetDiff < 0) offsetDiff += 360;
+
+            totalRotation += baseRotationToAdd + offsetDiff;
+            wheel.style.transform = `rotate(${totalRotation}deg)`;
+
+            setTimeout(() => {
+                isSpinning = false;
+                spinBtn.disabled = false;
+
+                spinSound.pause();
+                winSound.currentTime = 0;
+                winSound.play().catch(() => { });
+
+                resultPrize.innerText = `¡Felicidades! 😊 Ganaste ${segments[winningIndex]} en tu próxima estadía o upgrade. ¡No pierdas la oportunidad! 💝`;
+                
+                // Track prize won
+                dataLayer.push({
+                    'event': 'spin_wheel_result',
+                    'prize': segments[winningIndex],
+                    'segment_index': winningIndex
+                });
+                
+                resultModal.classList.add('open');
+                resultModal.setAttribute('aria-hidden', 'false');
+                resultDiv.classList.add('show');
+            }, 6000);
+        });
+    </script>
+</body>
+
+</html>
